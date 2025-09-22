@@ -1,0 +1,373 @@
+:root {
+    --primary-color: #0B2027;
+    --accent-color: #40798C;
+    --gray-color: #D9D9D9;
+    --font-serif: "Playfair Display", serif;
+    --font-mono: "JetBrains Mono", monospace;
+}
+
+body {
+    background-color: var(--accent-color);
+    color: var(--primary-color);
+    font-family: var(--font-mono);
+    margin: 0;
+    padding: 0;
+    cursor: none;
+    transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
+    overflow-x: hidden;
+}
+
+/* Custom Cursor */
+.custom-cursor {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--primary-color);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.02s ease-out;
+}
+
+/* Section Layout */
+.section {
+    min-height: 100vh;
+    display: flex;
+    top: 0;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 1rem;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.logo {
+    font-family: "Playfair Display", serif;
+    font-size: 50px;
+}
+
+/* New Header Container */
+.header-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem;
+    box-sizing: border-box;
+}
+
+/* Typography */
+h2 {
+    font-family: "Playfair Display", serif;
+    text-transform: uppercase;
+    font-size: clamp(2rem, 5vw, 6rem);
+    line-height: 1;
+    margin-bottom: 2rem;
+}
+
+h3 {
+    font-family: "Lato", sans-serif;
+    text-transform: uppercase;
+    font-size: clamp(1.5rem, 2vw, 2.5rem);
+    line-height: 1.2;
+    margin: 0 0 1rem 0;
+    text-align: center;
+}
+
+
+
+.nav a {
+    color: inherit;
+    text-decoration: none;
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    margin-left: 2rem;
+    transition: color 0.3s;
+}
+
+.nav a:hover {
+    color: white;
+}
+
+/* Project Grid and Scroll Animation */
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+    max-width: 90%;
+}
+
+.project-folder {
+    background-color: var(--accent-color);
+    color: var(--primary-color);
+    padding: 2rem;
+    border-radius: 10px;
+    transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+    opacity: 0;
+    transform: translateY(20px);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    min-height: 250px;
+}
+
+.project-folder.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Optional: Staggered animation */
+.project-folder:nth-child(2) { transition-delay: 0.1s; }
+.project-folder:nth-child(3) { transition-delay: 0.2s; }
+.project-folder:nth-child(4) { transition-delay: 0.3s; }
+.project-folder:nth-child(5) { transition-delay: 0.4s; }
+.project-folder:nth-child(6) { transition-delay: 0.5s; }
+
+
+/* Archive Gallery Styles */
+
+
+.archive-gallery {
+    margin-top: 5rem;
+    width: 90%;
+    margin-left: 50px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+}
+.ag-title {
+    font-family: "Lato", sans-serif;
+    text-transform: uppercase;
+    text-align: left;
+}
+.archive-gallery img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out;
+}
+
+.archive-gallery img:hover {
+    transform: rotate(5deg);
+}
+
+
+/* CSS for Flipper Card */
+.about-card {
+    width: 80%;
+    max-width: 600px;
+    height: 400px;
+    margin: auto;
+    position: relative;
+    perspective: 1000px;
+    cursor: pointer;
+}
+
+.card-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+.about-card:hover .card-inner {
+    transform: rotateY(180deg);
+}
+
+.card-front, .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    box-sizing: border-box;
+}
+
+.card-front {
+    background-color: var(--accent-color);
+    color: var(--primary-color);
+    z-index: 2;
+}
+
+.card-back {
+    background-color: var(--primary-color);
+    color: var(--accent-color);
+    transform: rotateY(180deg);
+}
+
+.read-more-link {
+    color: var(--accent-color);
+    text-decoration: none;
+    font-family: "Lato", sans-serif;
+    font-size: 1.2rem;
+    border: 2px solid var(--accent-color);
+    padding: 0.5rem 1rem;
+    transition: background 0.3s, color 0.3s;
+}
+
+.read-more-link:hover {
+    background-color: var(--accent-color);
+    color: var(--primary-color);
+}
+
+/* Work Section Specific Styles */
+.work-section {
+    position: relative;
+    background-color: var(--primary-color);
+    padding: 2rem;
+    box-sizing: border-box;
+    text-align: center; /* Center the work title */
+}
+
+.work-title {
+    color: var(--accent-color);
+    margin-bottom: 3rem;
+}
+
+.project-container {
+    display: flex;
+    flex-direction: column;
+    gap: 5rem; /* Increased gap between projects */
+    max-width: 900px; /* Increased max-width for folders */
+    margin: 0 auto;
+}
+
+.project-folder {
+    background-color: var(--accent-color);
+    color: var(--primary-color);
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    min-height: 550px; /* Adjusted minimum height for content */
+    opacity: 0;
+    transform: translateY(50px);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem; /* Gap between header and carousel */
+}
+
+.project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start; /* Align text at the top */
+    margin-bottom: 1rem;
+}
+
+.project-header .text-area {
+    text-align: left;
+    flex-grow: 1; /* Allows text area to take available space */
+}
+
+.project-folder h3 {
+    margin-bottom: 0.5rem; /* Small gap between title and description */
+}
+
+.project-description {
+    font-size: 1.05rem;
+    line-height: 1.4;
+    margin: 0;
+    text-align: left;
+}
+
+.top-right-text {
+    font-family: "JetBrains Mono", monospace; /* Different font */
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    color: rgba(33, 33, 33, 0.7); /* Slightly faded */
+    margin-left: 2rem; /* Gap from the description */
+    text-align: right;
+    white-space: nowrap; /* Prevents text from wrapping */
+}
+
+/* Carousel Styles */
+.carousel-container {
+    position: relative;
+    width: 100%;
+    max-width: 700px; /* Max width for the carousel */
+    height: 400px; /* Fixed height for consistency */
+    overflow: hidden;
+    margin: 0 auto;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.carousel-track {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s ease-in-out;
+}
+
+.carousel-track img {
+    min-width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures images cover the area */
+    display: block;
+}
+
+.carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(33, 33, 33, 0.5);
+    color: #fff;
+    border: none;
+    padding: 0.8rem 1.2rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 10;
+    border-radius: 5px;
+    opacity: 0.8;
+    transition: opacity 0.3s, background-color 0.3s;
+}
+
+.carousel-button:hover {
+    opacity: 1;
+    background-color: var(--primary-color);
+}
+
+.carousel-button.prev {
+    left: 10px;
+}
+
+.carousel-button.next {
+    right: 10px;
+}
+
+/* Gallery Grid Styles (Updated for Pinterest-style) */
+.archive-gallery {
+    margin-top: 5rem;
+    width: 90%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-gap: 1.5rem;
+    grid-auto-rows: minmax(10px, auto);
+}
+
+.archive-gallery img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out;
+    display: block;
+}
+
+.archive-gallery img:hover {
+    transform: rotate(5deg);
+}
