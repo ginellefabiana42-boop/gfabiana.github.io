@@ -70,17 +70,25 @@ h2 {
     margin-bottom: 2rem;
 }
 
+/* Updated h3 for project folders */
 h3 {
     font-family: "Lato", sans-serif;
     text-transform: uppercase;
     font-size: clamp(1.5rem, 2vw, 2.5rem);
     line-height: 1.2;
-    margin: 0 0 1rem 0;
+    margin: 0;
     text-align: center;
 }
 
-
-
+/* New h4 for project titles */
+h4 {
+    font-family: "Playfair Display", serif;
+    text-transform: uppercase;
+    font-size: clamp(1.8rem, 3vw, 3rem);
+    line-height: 1.2;
+    margin: 0;
+    text-align: left;
+} 
 .nav a {
     color: inherit;
     text-decoration: none;
@@ -128,11 +136,10 @@ h3 {
 .project-folder:nth-child(4) { transition-delay: 0.3s; }
 .project-folder:nth-child(5) { transition-delay: 0.4s; }
 .project-folder:nth-child(6) { transition-delay: 0.5s; }
+.project-folder:nth-child(7) { transition-delay: 0.6s; }
 
 
 /* Archive Gallery Styles */
-
-
 .archive-gallery {
     margin-top: 5rem;
     width: 90%;
@@ -142,7 +149,7 @@ h3 {
     gap: 1.5rem;
 }
 .ag-title {
-    font-family: "Lato", sans-serif;
+    font-family: "Playfair Display", serif;
     text-transform: uppercase;
     text-align: left;
 }
@@ -159,6 +166,43 @@ h3 {
     transform: rotate(5deg);
 }
 
+.image-showcase {
+  width: 80%; /* Adjust as needed */
+  margin: 20px auto;
+  overflow: hidden; /* This hides the images outside the viewable area */
+  border: 2px solid #ccc;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.showcase-reel {
+  display: flex;
+  /* Adjust animation duration for speed. Lower number = faster speed. */
+  animation: slide-left 60s linear infinite; 
+}
+
+.showcase-reel img {
+  height: 400px; /* Or a different fixed height */
+  width: auto;
+  object-fit: cover;
+}
+
+.image-showcase:hover .showcase-reel {
+  animation-play-state: paused;
+}
+
+/* Define the animation */
+@keyframes slide-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    /* Translate by the total width of your 9 unique images */
+    transform: translateX(-900%); 
+  }
+}
+
+
 
 /* CSS for Flipper Card */
 .about-card {
@@ -168,7 +212,7 @@ h3 {
     margin: auto;
     position: relative;
     perspective: 1000px;
-    cursor: pointer;
+    cursor: var(custom);
 }
 
 .card-inner {
@@ -298,25 +342,25 @@ h3 {
 .carousel-container {
     position: relative;
     width: 100%;
-    max-width: 700px; /* Max width for the carousel */
-    height: 400px; /* Fixed height for consistency */
-    overflow: hidden;
+    max-width: 700px;
     margin: 0 auto;
     border-radius: 8px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    cursor: var(custom);
+    overflow: hidden; /* This is the key fix */
 }
 
 .carousel-track {
     display: flex;
     width: 100%;
-    height: 100%;
     transition: transform 0.5s ease-in-out;
 }
 
 .carousel-track img {
     min-width: 100%;
-    height: 100%;
-    object-fit: cover; /* Ensures images cover the area */
+    height: auto;
+    max-height: 500px;
+    object-fit: contain;
     display: block;
 }
 
@@ -329,7 +373,7 @@ h3 {
     border: none;
     padding: 0.8rem 1.2rem;
     font-size: 1.5rem;
-    cursor: pointer;
+    cursor: var(custom);
     z-index: 10;
     border-radius: 5px;
     opacity: 0.8;
@@ -349,25 +393,91 @@ h3 {
     right: 10px;
 }
 
-/* Gallery Grid Styles (Updated for Pinterest-style) */
-.archive-gallery {
-    margin-top: 5rem;
-    width: 90%;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    grid-gap: 1.5rem;
-    grid-auto-rows: minmax(10px, auto);
-}
-
-.archive-gallery img {
+/* Lightbox Styles */
+.lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
-    height: auto;
-    border-radius: 8px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease-in-out;
-    display: block;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
 }
 
-.archive-gallery img:hover {
-    transform: rotate(5deg);
+.lightbox.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.lightbox-image {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 2rem;
+    cursor: var(custom);
+}
+
+.link {
+    font-size: 1.05rem;
+    line-height: 1.4;
+    margin: 0;
+    text-align: left;
+}
+
+.project-link {
+    color: black;
+    text-decoration: underline;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.project-link:hover {
+    color: var(--gray-color);
+}
+
+.social-links {
+    /* FIX: Changed direction back to horizontal (row is the default, but set explicitly for clarity) */
+    display: flex;
+    flex-direction: row; 
+    gap: 1.5rem; /* Increased gap for better spacing */
+    margin-top: 2rem;
+    flex-wrap: wrap; /* Allows links to wrap on small screens */
+    justify-content: center;
+}
+
+.contact-link {
+    color: var(--primary-color);
+    font-size: 1.2rem;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border: 2px solid var(--primary-color); /* Used primary color for visible border */
+    transition: all 0.3s ease;
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+}
+
+.contact-link:hover {
+    color: var(--accent-color);
+    background-color: var(--primary-color);
+    border-color: var(--accent-color);
+    transform: scale(1.05);
+}
+
+.contact-link i {
+    margin-right: 0.5rem;
 }
