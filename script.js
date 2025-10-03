@@ -55,7 +55,7 @@ projectFolders.forEach((folder, i) => {
     gsap.to(folder, {
         opacity: 1,
         y: 0,
-        duration: 0.8,
+        duration: 0.9,
         ease: "power2.out",
         scrollTrigger: {
             trigger: folder,
@@ -79,18 +79,49 @@ document.querySelectorAll('.carousel-container').forEach(carousel => {
         track.style.transform = `translateX(-${currentIndex * 100}%)`;
     }
 
-    // Event listener for the next button
     nextButton.addEventListener('click', () => {
         currentIndex = (currentIndex + 1) % images.length;
         updateCarousel();
     });
 
-    // Event listener for the previous button
     prevButton.addEventListener('click', () => {
         currentIndex = (currentIndex - 1 + images.length) % images.length;
         updateCarousel();
     });
 
-    // Initialize carousel to show the first image
+    // Event listener for image enlarge
+    images.forEach(img => {
+        img.addEventListener('click', () => {
+            lightboxImage.src = img.src;
+            lightbox.classList.add('show');
+        });
+    });
+
     updateCarousel();
+});
+
+// Event listener for lightbox close button
+lightboxClose.addEventListener('click', () => {
+    lightbox.classList.remove('show');
+});
+
+// Close lightbox when clicking outside of the image
+lightbox.addEventListener('click', (e) => {
+    if (e.target.classList.contains('lightbox')) {
+        lightbox.classList.remove('show');
+    }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  const imageShowcase = document.querySelector('.image-showcase');
+  const showcaseReel = document.querySelector('.showcase-reel');
+
+  // This simple JS adds and removes a class for the pause effect
+  imageShowcase.addEventListener('mouseenter', () => {
+    showcaseReel.style.animationPlayState = 'paused';
+  });
+
+  imageShowcase.addEventListener('mouseleave', () => {
+    showcaseReel.style.animationPlayState = 'running';
+  });
 });
